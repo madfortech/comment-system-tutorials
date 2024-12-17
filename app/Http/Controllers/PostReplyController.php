@@ -29,11 +29,11 @@ class PostReplyController extends Controller
             'original_text' => $request->input('original_text'),
         ]);
 
-        // $parentComment  = Comment::find($request->input('parent_id'));
-        // if (!$parentComment) {
-        //     abort(404); // Not Found
-        // }
-        // $parentComment->commentator->notify(new PostReplyNotification($reply));
+        $parentComment  = Comment::find($request->input('parent_id'));
+        if (!$parentComment) {
+            abort(404); // Not Found
+        }
+        $parentComment->commentator->notify(new PostReplyNotification($reply));
 
         return redirect()->back();
     }

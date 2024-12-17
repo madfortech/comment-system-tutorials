@@ -29,7 +29,8 @@ class CommentController extends Controller
             'original_text' => $request->input('original_text'),
         ]);
 
-       
+        $comment->react($request->input('reaction'));
+
         $post = Post::find($request->input('commentable_id'));
      
         
@@ -41,11 +42,13 @@ class CommentController extends Controller
     // Edit
     public function edit(Comment $comment)
     {
-        if (!$comment) {
-            return back()->withErrors(['comment' => 'Comment not found']);
-        }
-
-        return view('comments.edit', compact('comment'));
+        // if (!$comment) {
+        //     return back()->withErrors(['comment' => 'Comment not found']);
+        // }
+        $post = Post::find($comment->commentable_id);
+        return view('components.comments.edit', compact('comment', 'post'));
+       // return view('comments.edit', compact('comment'));
+       // return view('components.comments.edit', compact('comment'));
     }
 
 

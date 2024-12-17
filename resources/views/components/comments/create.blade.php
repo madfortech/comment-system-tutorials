@@ -17,6 +17,8 @@
         </div>
       </div>
       {{-- name field --}}
+
+      
       <div class="col-12">
         @if (Auth::check())
           <button type="submit" class="btn btn-primary rounded-0 border-0">
